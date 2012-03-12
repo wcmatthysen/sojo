@@ -18,7 +18,7 @@ package test.net.sf.sojo.interchange.xmlrpc;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import test.net.sf.sojo.model.Car;
@@ -197,20 +197,20 @@ public class XmlRpcWalkerInterceptorTest extends TestCase {
 	}
 	
 	public void testMapInArray() throws Exception {
-		Map<String, Comparable<?>> lvMap = new Hashtable<String, Comparable<?>>();
+		Map<String, Comparable<?>> lvMap = new LinkedHashMap<String, Comparable<?>>();
 		lvMap.put("k1", "v1");
 		lvMap.put("k2", new Double("1.00005"));
 		Object lvArray[] = new Object[] { new Integer(7), lvMap , "my-test-string" };
 		
 		walker.walk(lvArray);
 		
-		
+		// TODO HashMap does not guarantee to keep the order of elements. 
 		String s = "<params><param>" +
 						"<value><i4>7</i4></value>" +
 					"</param>" +
 					"<param><value><struct>" +
-						"<member><name>k2</name><value><double>1.00005</double></value></member>" +	
 						"<member><name>k1</name><value><string>v1</string></value></member>" +						
+						"<member><name>k2</name><value><double>1.00005</double></value></member>" +	
 					"</struct></value></param>" +
 					"<param><value><string>my-test-string</string></value>" +
 					"</param></params>";
