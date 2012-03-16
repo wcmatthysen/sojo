@@ -3,11 +3,23 @@
   <groupId>net.sf.sojo</groupId>
   <artifactId>sojo</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.4-SNAPSHOT</version>
+  <version>1.0.5-SNAPSHOT</version>
   <name>SOJO</name>
   <url>http://sojo.sourceforge.net</url>
 
+  <description>
+  	Simplified Old Java Objects.
+  	This is a refactored version of the original sojo at http://sojo.sf.net for Java 1.6+. 
+  </description>
+
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+  
   <scm>
+  	<url>http://github.com/maddingo/sojo</url>
     <connection>scm:git:http://github.com/maddingo/sojo</connection>
     <developerConnection>scm:git:git@github.com:maddingo/sojo.git</developerConnection>
   </scm>
@@ -76,12 +88,23 @@
         <executions>
           <execution>
             <id>attach-source</id>
-            <phase>verify</phase>
             <goals>
               <goal>jar</goal>
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+      	<artifactId>maven-javadoc-plugin</artifactId>
+      	<version>2.8.1</version>
+      	<executions>
+      		<execution>
+      			<id>attach-javadoc</id>
+      			<goals>
+      				<goal>jar</goal>
+      			</goals>
+      		</execution>
+      	</executions>
       </plugin>
       <plugin>
       	<groupId>org.codehaus.mojo</groupId>
@@ -182,4 +205,16 @@
           <distribution>repo</distribution>
        </license>
   </licenses>
-  </project>
+
+  <distributionManagement>
+	<repository>
+		<id>sonatype-nexus-staging</id>
+		<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+	</repository>
+	<snapshotRepository>
+		<id>sonatype-nexus-snapshots</id>
+		<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+	</snapshotRepository>
+  </distributionManagement>
+
+</project>
